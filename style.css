@@ -8,6 +8,12 @@ body {
 	margin: auto;
 	background: url('pictures/board.jpg');
 		}
+#messageArea {rgb(83,175,19)
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: ;
+}
 		table{
 			position: absolute;
 			left: 173px;
@@ -17,4 +23,11 @@ body {
 		td{
 			width: 94px;
 			height: 94px;
+		}
+		form {
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			padding: 15px;
+			background-color: rgb(83,175,19);
 		}
