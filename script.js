@@ -48,8 +48,3 @@ let model= {
 		return true
 	}
 }
-model.fire('16')
-model.fire('53')
-model.fire('26')
-model.fire('06')
-
