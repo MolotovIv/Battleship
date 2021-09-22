@@ -16,19 +16,19 @@ let model= {
 	numShips:3,
 	shipsSunk:0,
 	shipLength:3,
-	ships:[ {locations:['00','00','00'], hits:['','','']},
-	{locations:['00','00','00'], hits:['','','']},
-	{locations:['00','00','00'], hits:['','','']}	],
+	ships:[ {locations:['00','00','00'], hits:['0','0','0']},
+	{locations:['00','00','00'], hits:['0','0','0']},
+	{locations:['00','00','00'], hits:['0','0','0']}	],
 	fire: function(guess){
 		for (let i=0;i<this.numShips;i++) {
 			let ship=this.ships[i];
 			let index=ship.locations.indexOf(guess);
 
-			if (index>=0) {
-				ship.hits[index]='hit'
+			if (index>=0 && ship.hits[index]!=='hit') {
+								ship.hits[index]='hit'
 				view.displayMassege('HIT!');
 				view.displayHit(guess);
-				if (this.isSunk(ship)) {
+								if (this.isSunk(ship)) {
 					view.displayMassege('You sunk my battleship')
 					this.shipsSunk++;
 				}
