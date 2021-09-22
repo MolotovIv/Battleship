@@ -23,8 +23,11 @@ let model= {
 		for (let i=0;i<this.numShips;i++) {
 			let ship=this.ships[i];
 			let index=ship.locations.indexOf(guess);
-
-			if (index>=0 && ship.hits[index]!=='hit') {
+      if (ship.hits[index]=='hit'){
+      	view.displayMassege('You already blow it away!!!')
+      	return false
+      }
+			if (index>=0 ) {
 								ship.hits[index]='hit'
 				view.displayMassege('HIT!');
 				view.displayHit(guess);
