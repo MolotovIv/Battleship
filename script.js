@@ -22,7 +22,7 @@ let model= {
 	fire: function(guess){
 		for (let i=0;i<this.numShips;i++) {
 			let ship=this.ships[i];
-			let index=ship.location.indexOf(guess);
+			let index=ship.locations.indexOf(guess);
 
 			if (index>=0) {
 				ship.hits[index]='hit'
@@ -54,7 +54,7 @@ let model= {
 				locations=this.generateShip();
 			} while (this.collision(locations));
 			this.ships[i].locations=locations;
-			}
+		}
 	},
 	generateShip: function() {
 		var direction = Math.floor(Math.random() * 2);
@@ -78,16 +78,17 @@ let model= {
 		}
 		return newShipLocations;
 	},
-collision : function(locations) {
-	for (let i=0; i<this.shipLength;i++)
-		var ship=model.ships[i];
-	for( let j=0;j<locations.length;j++) {
-		if (ship.locations.indexOf(locations[j])>=0) {
-			return true;
+	collision : function(locations) {
+		for (let i = 0; i <this.numShips ; i++) {
+			var ship=model.ships[i];
+			for( let j=0;j<locations.length;j++) {
+				if (ship.locations.indexOf(locations[j])>=0) {
+					return true;
+				}
+			}
 		}
+		return false
 	}
-	return false
-}
 
 }
 
@@ -95,15 +96,15 @@ let controller= {
 	gusses: 0,
 	processGuess: function(guess){
 		let location =parseGuess(guess);
-        if (location) {
-        	this.gusses++;
-        	let hit= model.fire(location)
-        	if (hit && model.shipsSunk===model.numShips) {
-        		view.displayMassege('You sank all my battleships,in '+ this.gusses+'gusses')
-        		alert ('Game Over')
-        	}
-        }
-	
+		if (location) {
+			this.gusses++;
+			let hit= model.fire(location)
+			if (hit && model.shipsSunk===model.numShips) {
+				view.displayMassege('You sank all my battleships,in '+ this.gusses+'gusses')
+				alert ('Game Over')
+			}
+		}
+
 	}
 }
 function parseGuess(guess) {
@@ -139,23 +140,23 @@ function handleFireButton() {
 
 function handleKeyPress(e) {
 	let fireButton=document.getElementById('fireButton');
-if( e.keyCode===13) {
-	fireButton.click();
-	return false
-}
+	if( e.keyCode===13) {
+		fireButton.click();
+		return false
+	}
 
 }
 
-  window.onload=init;
+window.onload=init;
 
 
 function init() {
-var fireButton=document.getElementById('fireButton');
-fireButton.onclick=handleFireButton;
-let guessInput=document.getElementById('guessInput')
-guessInput.onkeypress=handleKeyPress;
+	var fireButton=document.getElementById('fireButton');
+	fireButton.onclick=handleFireButton;
+	let guessInput=document.getElementById('guessInput')
+	guessInput.onkeypress=handleKeyPress;
 
-model.generateshipLocation();
+	model.generateshipLocation();
 }
 
 
